@@ -18,7 +18,7 @@ func (self *List) Add(value string) {
         self.head = &Node{nil, ""}
         self.middle = self.head
     }
-    
+
     if self.middle.value < value {
         self.AddAfterNode(self.middle, value)
     } else {
@@ -48,7 +48,7 @@ func (self *List) AddAfterNode(node *Node, value string) {
         current = current.next
     }
 
-    self.length++ 
+    self.length++
 }
 
 func (self *List) ToSlice() (result []string) {
@@ -64,5 +64,5 @@ func (self *List) ToSlice() (result []string) {
         i++
     }
 
-    return 
+    return
 }

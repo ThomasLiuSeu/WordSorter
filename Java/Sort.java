@@ -7,7 +7,7 @@ import java.util.LinkedList;
 
 final public class Sort {
 
-    private static Sort instance = null;
+    private static Sort instance = new Sort;
     private int numberOfWords = 0;
     private String[] words;
 
@@ -33,24 +33,24 @@ final public class Sort {
         }
 
         Sort sort = Sort.getInstance();
-        Date start = new Date(); // For å beregne tidsforbruk
+        Date start = new Date(); // To calculate time
 
-        if (!sort.getWordsFromInput(args[1])) { // Les inn fra fil
+        if (!sort.getWordsFromInput(args[1])) { // Read from file
             System.out.println("Could not retrieve words from " + args[1] + "!");
             return;
         }
 
-        if (!sort.sortWords(threadCount)) { // Sorter med threadCount antall tråder
+        if (!sort.sortWords(threadCount)) { // Sort with 'threadCount' number of threads
             System.out.println("Something went wrong when sorting the words!");
             return;
         }
 
-        if (!sort.writeWordsToOutput(args[2])) { // Skriv resultat til fil
+        if (!sort.writeWordsToOutput(args[2])) { // Write sorted words to file
             System.out.println("Could not write sorted words to " + args[2]);
             return;
         }
 
-        Date end = new Date(); // Beregn tidsforbruk
+        Date end = new Date(); // Calculate total amount of time
         long timeToComplete = end.getTime() - start.getTime();
 
         System.out.println();
@@ -59,35 +59,31 @@ final public class Sort {
                            + timeToComplete + " milliseconds.");
     }
 
-    private Sort() {} // Gjør det umulig å opprette ett nyt Sort objekt utenfor denne klassen
+    private Sort() {} // Make it impossible to create a new Sort object outside this class
 
     private static Sort getInstance() {
-        if (instance == null) {
-            instance = new Sort();
-        }
-
         return instance;
-    } // Returner singleton objekt
+    } // Return singleton
 
 
     public boolean getWordsFromInput(String inputFile) {
         System.out.print("Loading contents of " + inputFile + "... ");
         Date start = new Date();
 
-        StringBuilder firstLine = new StringBuilder(); // Første linja, som inneholder antall ord
-        StringBuilder lines = new StringBuilder(); // Ordene for sortering
+        StringBuilder firstLine = new StringBuilder(); // The first line contains number of words
+        StringBuilder lines = new StringBuilder(); // Each successive line contains the actual words
 
         try {
             BufferedReader input = new BufferedReader(new FileReader(inputFile));
-            boolean readFirstLine = false; // Har vi lest første linje?
+            boolean readFirstLine = false;
 
             for (int charByte = input.read(); charByte >= 0; charByte = input.read()) {
                 char readChar = (char)charByte;
 
-                if (readChar == '\r') { // ignorer \r tegn
-                } else if (readFirstLine) { // Vi har lest første linje
+                if (readChar == '\r') { // ignore \r
+                } else if (readFirstLine) {
                     lines.append(readChar);
-                } else { // Vi har ikke lest første linje, les frem til linjeskift
+                } else {
                     if (readChar == '\n') {
                         readFirstLine = true;
                         continue;
@@ -122,7 +118,7 @@ final public class Sort {
         System.out.print("Writing results to " + outputFile + "... ");
         Date start = new Date();
 
-        if (words.length != numberOfWords) { // Sjekker om vi har sortert riktig antall ord
+        if (words.length != numberOfWords) {
             System.out.println("Sorted list does not contain expected number of words!");
             return false;
         }
@@ -154,8 +150,8 @@ final public class Sort {
 
         LinkedList<WordHandler> wordHandlers = new LinkedList<WordHandler>();
 
-        initSortThreads(threadCount, wordHandlers); // Start sortering
-        boolean sortResult = interleaveThreads(wordHandlers); // Flett sammen resultat
+        initSortThreads(threadCount, wordHandlers);
+        boolean sortResult = interleaveThreads(wordHandlers);
 
         Date end = new Date();
         long timeDiff = end.getTime() - start.getTime();

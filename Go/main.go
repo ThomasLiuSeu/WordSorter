@@ -12,7 +12,7 @@ import (
 )
 
 func main() {
-    runtime.GOMAXPROCS(runtime.NumCPU()) //Use all available CPUs
+    runtime.GOMAXPROCS(runtime.NumCPU()) // Use all available CPUs
 
     if len(os.Args) < 4 {
         fmt.Println("Too few arguments. You must supply thread-count, input and output files")
@@ -47,14 +47,14 @@ func timeFunc(event string, action func()) {
     action()
     duration := time.Since(start)
 
-    fmt.Printf("%s finished in %d ms\n", event, duration / time.Millisecond) 
+    fmt.Printf("%s finished in %d ms\n", event, duration / time.Millisecond)
 }
 
 func sortWords(words []string, threadCount int) []string {
     wordCount := len(words)
     wordsPerThread := wordCount / threadCount
     wordsRemainingPerThread := wordCount % threadCount
-    
+
     sortedWordSlices := make(chan []string)
     sortIndex := 0
 

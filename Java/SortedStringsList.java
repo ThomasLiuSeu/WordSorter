@@ -12,9 +12,9 @@ public class SortedStringsList implements Iterable<String> {
 
     public void add(String string) {
         if (middle.value != null && middle.value.compareTo(string) < 0) {
-            addToList(middle, string); // Start insetting fra midten
+            addToList(middle, string);
         } else {
-            addToList(head, string); // Start innsetting fra start
+            addToList(head, string);
         }
     }
 
@@ -22,7 +22,7 @@ public class SortedStringsList implements Iterable<String> {
         Node current = start;
         Node newEntry = new Node(string);
 
-        int middleIndex = size/2; // Indexen til den midterse verdien i lista
+        int middleIndex = size / 2; // Index of middle value
 
         for (int i = 0; ; i++, current = current.next) {
             if (current.next == null) {
@@ -34,7 +34,7 @@ public class SortedStringsList implements Iterable<String> {
                 break;
             }
 
-            if (i == middleIndex) { // Oppdater midterste verdi, hvis vi er i midten av lista
+            if (i == middleIndex) {
                 this.middle = current;
             }
         }

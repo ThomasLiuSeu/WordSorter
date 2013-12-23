@@ -1,9 +1,9 @@
 public class WordSorter extends Thread implements WordHandler {
 
-    private String[] sorted = null; // Den etterhvert sorterte arrayen
-    private String[] sourceStrings = null; // Kildearrayet som vi henter ordene våre fra
-    private int start = 0; // Settes i konstruktør, startindex i kildearrayet
-    private int end = 0; // Siste index i kildearrayet
+    private String[] sorted = null;
+    private String[] sourceStrings = null;
+    private int start = 0;
+    private int end = 0;
 
 
     public WordSorter(String[] sourceList, int start, int end) {
