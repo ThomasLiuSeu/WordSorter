@@ -7,7 +7,7 @@ import java.util.LinkedList;
 
 final public class Sort {
 
-    private static Sort instance = new Sort;
+    private static Sort instance = new Sort();
     private int numberOfWords = 0;
     private String[] words;
 
