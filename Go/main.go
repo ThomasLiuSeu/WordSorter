@@ -8,7 +8,6 @@ import (
     "io/ioutil"
     "time"
     "runtime"
-    "wordsort"
 )
 
 func main() {
@@ -66,7 +65,7 @@ func sortWords(words []string, threadCount int) []string {
             wordsRemainingPerThread--
         }
 
-        go wordsort.SortSlice(words[sortIndex:sortIndex + wordsForThread], sortedWordSlices)
+        go SortSlice(words[sortIndex:sortIndex + wordsForThread], sortedWordSlices)
         sortIndex += wordsForThread
     }
 
@@ -78,7 +77,7 @@ func sortWords(words []string, threadCount int) []string {
             cachedResult = &newResult
             remainingThreads--
         } else {
-            go wordsort.JoinSortedSlices(*cachedResult, newResult, sortedWordSlices)
+            go JoinSortedSlices(*cachedResult, newResult, sortedWordSlices)
             cachedResult = nil
         }
     }

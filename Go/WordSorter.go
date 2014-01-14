@@ -1,4 +1,4 @@
-package wordsort
+package main
 
 func SortSlice(strings []string, out chan<- []string) {
     sorted := &List{}

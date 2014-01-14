@@ -1,4 +1,4 @@
-package wordsort
+package main
 
 type List struct {
     length int
